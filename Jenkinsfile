@@ -39,7 +39,12 @@ stage('Test') {
                 
                 sh '''
                    chmod 400 /var/lib/jenkins/aws/my-ec2-key.pem || true
-                   scp -o StrictHostKeyChecking=no -i /var/lib/jenkins/aws/my-ec2-key.pem HelloWorld.class ubuntu@13.235.67.84:/var/www/app/
+            
+            # Copy the compiled file to EC2
+            scp -o StrictHostKeyChecking=no -i /var/lib/jenkins/aws/my-ec2-key.pem HelloWorld.class ubuntu@13.235.67.84:/var/www/app/
+            
+            # Run the Java program on EC2 and print its output
+            ssh -o StrictHostKeyChecking=no -i /var/lib/jenkins/aws/my-ec2-key.pem ubuntu@13.235.67.84 "cd /var/www/app && java HelloWorld"
                 '''
             }
         }
