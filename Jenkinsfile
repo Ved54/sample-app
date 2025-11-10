@@ -39,7 +39,7 @@ stage('Test') {
                 
                 sh '''
                    chmod 400 /var/lib/jenkins/aws/my-ec2-key.pem || true
-                   scp -o StrictHostKeyChecking=no -i /var/lib/jenkins/aws/yourkey.pem HelloWorld.class ubuntu@13.235.67.84:/var/www/app/
+                   scp -o StrictHostKeyChecking=no -i /var/lib/jenkins/aws/my-ec2-key.pem HelloWorld.class ubuntu@13.235.67.84:/var/www/app/
                 '''
             }
         }
