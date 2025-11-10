@@ -38,7 +38,7 @@ pipeline {
                 echo 'Deploying to AWS EC2...'
                 
                 sh '''
-                   chmod 400 /var/lib/jenkins/aws/yourkey.pem || true
+                   chmod 400 /var/lib/jenkins/aws/my-ec2-key.pem || true
                    scp -o StrictHostKeyChecking=no -i /var/lib/jenkins/aws/yourkey.pem HelloWorld.class ubuntu@13.235.67.84:/var/www/app/
                 '''
             }
