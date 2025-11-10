@@ -9,21 +9,21 @@ pipeline {
         }
 
         stage('Build') {
-            steps {
-                echo 'Building the application...'
-                // compile and put .class in current workspace
-                sh 'javac HelloWorld.java'
-                sh 'ls -la' // show produced files for debugging
-            }
-        }
+    steps {
+        echo 'Building the application...'
+        // Compile both HelloWorld.java and HelloWorldTest.java
+        sh 'javac HelloWorld.java HelloWorldTest.java'
+        sh 'ls -la'
+    }
+}
 
-        stage('Test') {
-            steps {
-                echo 'Running tests...'
-                // run test from current workspace; test must exit non-zero on failure
-                sh 'java -cp . HelloWorldTest'
-            }
-        }
+stage('Test') {
+    steps {
+        echo 'Running tests...'
+        // Run the compiled test class
+        sh 'java -cp . HelloWorldTest'
+    }
+}
 
         stage('Prepare Artifact') {
             steps {
